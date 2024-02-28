@@ -1,3 +1,26 @@
+Clone the repository:
+
+```bash
+git clone git@github.com:kenil-8520/restaurant-practical.git
+```
+Install dependencies:
+
+ ```bash
+ npm install
+```
+
+
+Create a .env file
+```bash
+HOST="localhost"
+USER="root"
+PASSWORD="root"
+DB="restaurant_task"
+PORT=8080
+JWT_SECRET="secret123"
+MAILTRAP_USER="mailtrap user"
+MAILTRAP_PASSWORD="mailtrap password"
+```
 
 Restaurant seeder :
 ```bash
