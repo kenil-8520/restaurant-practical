@@ -1,22 +1,36 @@
 import jwt, {JwtPayload} from 'jsonwebtoken';
+import dotenv from "dotenv"
+
+dotenv.config();
 
 interface User {
     email: string;
     id: string;
 }
 
-const generateAccessToken = (user: User): string => {
-    const token = jwt.sign(
-        {
-            user: {
-                email: user.email,
-                id: user.id,
-            },
-        },
-        process.env.JWT_SECRET as string,
-        { expiresIn: "15h" }
-    );
-    return token
+const generateTokens = (user: User): { accessToken: string; refreshToken: string } => {
+  const accessToken = jwt.sign(
+      {
+          user: {
+              email: user.email,
+              id: user.id,
+          },
+      },
+      process.env.JWT_SECRET as string,
+      { expiresIn: '60m' }
+  );
+
+  const refreshToken = jwt.sign(
+      {
+          user: {
+              id: user.id,
+          },
+      },
+      process.env.JWT_SECRET as string ,
+      { expiresIn: '1d' }
+  );
+
+  return { accessToken, refreshToken };
 };
 
 export const decodeToken = (token:string) => {
@@ -30,4 +44,4 @@ export const decodeToken = (token:string) => {
   }
 
 
-export { generateAccessToken };
+export { generateTokens };

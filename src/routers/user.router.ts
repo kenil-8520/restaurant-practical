@@ -10,7 +10,7 @@ router.post('/register', userRegistrationValidation, validateError, userRegistra
 
 router.post('/login', emailValidation, validateError, userLogin);
 
-router.post('/forgot-password',verifyToken,  emailValidation, validateError, forgotPassword);
+router.post('/forgot-password', emailValidation, validateError, forgotPassword);
 
 router.post('/reset-password', verifyToken, resetPassword);
 

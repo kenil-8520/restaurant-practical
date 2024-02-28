@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import {findUserByEmail,createUserService} from '../services/user.services'
 import bcrypt from 'bcrypt';
-import {generateAccessToken} from '../helpers/token'
+import {generateTokens} from '../helpers/token'
 import sendEmail from "../utils/sendEmail"
 import { decodeToken } from "../helpers/token";
 
@@ -34,8 +34,9 @@ export const userLogin = async (req: Request, res: Response) => {
         if (!passwordValid) {
             return res.status(401).json({ success: false, message: "Incorrect email or password" });
         }
-        const token = generateAccessToken(user as any);
-        const data = {  email: user.email, accessToken: token };
+        const { accessToken, refreshToken } = generateTokens(user as any);
+        const data = { email: user.email, accessToken, refreshToken };
+
         return res.status(200).json({ success: true, data: data, message: "Login successfully" });
     } catch (err: any) {
         console.log(err);
@@ -51,11 +52,11 @@ export const forgotPassword = async (req: Request, res: Response) => {
             return res.status(404).json({ success: false, message: "No user found with this email" });
         }
 
-        const resetToken =  await generateAccessToken(user as any);
+        const resetToken = generateTokens(user as any);
         await sendEmail({
             to: user.email as string,
             subject: 'Password Reset',
-            text: `this is the token to reset the password \n${resetToken}`,
+            text: `this is the token to reset password \n${resetToken.accessToken}`,
         });
         return res.status(200).json({success: true, message: "Reset link sent on your email id."});
     } catch (error) {
