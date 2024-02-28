@@ -8,11 +8,6 @@ Install dependencies:
  ```bash
  npm install
 ```
-Start Project:
-
- ```bash
- npm run dev
-```
 
 
 Create a .env file
@@ -30,6 +25,12 @@ MAILTRAP_PASSWORD="mailtrap password"
 Restaurant seeder :
 ```bash
 npx ts-node src/seeder/restaurant.seeder.ts
+```
+
+Start Project:
+
+ ```bash
+ npm run dev
 ```
 Postman Collection : https://api.postman.com/collections/24370147-3f6c8af7-957c-4386-b6eb-177a358c410c?access_key=PMAT-01HQN8BP36TH3KP1EEB8GN04BG
 
