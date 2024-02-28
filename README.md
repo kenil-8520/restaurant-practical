@@ -8,6 +8,11 @@ Install dependencies:
  ```bash
  npm install
 ```
+Start Project:
+
+ ```bash
+ npm run dev
+```
 
 
 Create a .env file
