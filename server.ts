@@ -3,11 +3,16 @@ import Server from "./src/index";
 
 const app: Application = express();
 const server: Server = new Server(app);
-const PORT: number = process.env.PORT ? parseInt(process.env.PORT, 10) : 8080;
+
+const PORT:any = process.env.PORT
+
+app.get('/', (req, res) =>{
+  res.json({success: false, message : "API working"})
+})
 
 app
   .listen(PORT, "localhost", function () {
-    console.log(`Server is running on ${PORT}.`);
+    console.log(`server running on http://localhost:${PORT}`);
   })
   .on("error", (err: any) => {
     if (err.code === "EADDRINUSE") {
