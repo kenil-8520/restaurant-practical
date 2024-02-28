@@ -1,30 +1,29 @@
 import { Model, Table, Column, DataType } from "sequelize-typescript";
+import UserAttributes from "../interfaces/user.interface"
 
 @Table({
-    tableName: "user",
-  })
-  export default class User extends Model {
-    @Column({
+  tableName: "user",
+})
+export default class User extends Model<UserAttributes> implements UserAttributes {
+  @Column({
       type: DataType.INTEGER,
       primaryKey: true,
       autoIncrement: true,
       field: "id"
-    })
-    id?: number;
+  })
+  id?: number;
 
-    @Column({
+  @Column({
       type: DataType.STRING(255),
+      allowNull: false,
       field: "email"
-    })
-    email?: string;
+  })
+  email!: string;
 
-    @Column({
+  @Column({
       type: DataType.STRING(255),
+      allowNull: false,
       field: "password"
-    })
-    password?: string;
-    static password: string;
-    static email: string;
-
-  }
-
+  })
+  password!: string;
+}
