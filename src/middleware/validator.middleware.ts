@@ -36,7 +36,7 @@ export const createRestaurantValidation = [
 
 export const deleteRestaurantValidation = [
   param('id').not().isEmpty().withMessage('id is required to delete the restaurant'),
-  param('id').isAlpha().withMessage('Invalid id please provide a valid id'),
+  param('id').isNumeric().withMessage('Invalid id please provide a valid id'),
 ]
 
 export const getRestaurantValidation = [
